@@ -6,3 +6,11 @@ class Noticia(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+class Replica(models.Model):
+    name=models.CharField(max_length=50)
+    detalle=models.TextField()
+    numer=models.SmallIntegerField()
+
+    def __str__(self):
+            return self.name
