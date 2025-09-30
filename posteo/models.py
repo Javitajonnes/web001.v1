@@ -3,6 +3,7 @@ from django.db import models
 class Noticia(models.Model):
     titulo=models.CharField(max_length=100)
     detalle=models.TextField()
+    imagen=models.ImageField()
 
     def __str__(self):
         return self.titulo
@@ -10,7 +11,7 @@ class Noticia(models.Model):
 class Replica(models.Model):
     name=models.CharField(max_length=50)
     detalle=models.TextField()
-    numer=models.SmallIntegerField()
+    numero=models.SmallIntegerField()
 
     def __str__(self):
             return self.name

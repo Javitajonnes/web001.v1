@@ -4,12 +4,13 @@
 {% static 'posteo/assets/img/post-bg.jpg' %}
 {% endblock %}
 {% block content %} 
-<p>Noticias . en construccion</p>
-{% for n in noticia %}
+<p>Noticias  en construccion</p>
+{% for n in noticias %}
 
 <hr>
 <p>{{ n.titulo }} </p> 
 <p>{{ n.detalle }}</p>
+<p>{{ n.imagen }}</p>
 <hr>
 {% endfor %}
 
