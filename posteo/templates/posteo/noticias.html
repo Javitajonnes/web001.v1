@@ -3,16 +3,136 @@
 {% block bgr %}  
 {% static 'posteo/assets/img/post-bg.jpg' %}
 {% endblock %}
-{% block content %} 
-<p>Noticias  en construccion</p>
-{% for n in noticias %}
 
-<hr>
-<p>{{ n.titulo }} </p> 
-<p>{{ n.detalle }}</p>
-<p>{{ n.imagen }}</p>
-<hr>
-{% endfor %}
+{% block content %}
+<style>
+    .noticias-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .noticia-card {
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .noticia-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .noticia-imagen {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+    }
+    
+    .noticia-content {
+        padding: 2rem;
+    }
+    
+    .noticia-titulo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        font-family: 'Lora', serif;
+    }
+    
+    .noticia-detalle {
+        font-size: 1.1rem;
+        color: #6c757d;
+        line-height: 1.7;
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 0;
+    }
+    
+    .noticia-sin-imagen {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+    }
+    
+    .noticias-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .noticias-titulo-principal {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #212529;
+        font-family: 'Lora', serif;
+        margin-bottom: 0.5rem;
+    }
+    
+    .noticias-subtitulo {
+        font-size: 1.2rem;
+        color: #6c757d;
+        font-family: 'Open Sans', sans-serif;
+    }
+    
+    .no-noticias {
+        text-align: center;
+        padding: 3rem;
+        background: #f8f9fa;
+        border-radius: 15px;
+        color: #6c757d;
+        font-size: 1.2rem;
+    }
+    
+    @media (max-width: 768px) {
+        .noticia-imagen {
+            height: 250px;
+        }
+        
+        .noticia-titulo {
+            font-size: 1.5rem;
+        }
+        
+        .noticia-content {
+            padding: 1.5rem;
+        }
+    }
+</style>
 
+<div class="noticias-container">
+    <div class="noticias-header">
+        <h1 class="noticias-titulo-principal">Últimas Noticias</h1>
+        <p class="noticias-subtitulo">Mantente al día con nuestras publicaciones</p>
+    </div>
+    
+    {% for n in noticias %}
+    <article class="noticia-card">
+        {% if n.imagen %}
+            <img src="{{ n.imagen.url }}" alt="{{ n.titulo }}" class="noticia-imagen">
+        {% else %}
+            <div class="noticia-sin-imagen">
+                <i class="fas fa-newspaper"></i>
+            </div>
+        {% endif %}
+        
+        <div class="noticia-content">
+            <h2 class="noticia-titulo">{{ n.titulo }}</h2>
+            <p class="noticia-detalle">{{ n.detalle }}</p>
+        </div>
+    </article>
+    {% empty %}
+    <div class="no-noticias">
+        <i class="fas fa-inbox fa-3x mb-3"></i>
+        <p>No hay noticias disponibles en este momento.</p>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
